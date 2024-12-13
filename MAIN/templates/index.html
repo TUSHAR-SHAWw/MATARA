@@ -1,0 +1,495 @@
+{% extends 'base.html' %}
+{% block content%}
+{% load static %}
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index" class="logo">
+                        <img src='{%static "assets/images/logo.png"%}' alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li><a href="index" class="active">Home</a></li>
+                        <li><a href="about">About</a></li>
+                        <li><a href="pricing">Pricing</a></li>
+                        <li><a href="booking">Book Order</a></li>
+                        <li><a href="contact">Contact Us</a></li>
+                    </ul>   
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <!-- ***** Main Banner Area Start ***** -->
+  <section id="section-1">
+    <div class="content-slider">
+      <input type="radio" id="banner1" class="sec-1-input" name="banner" checked>
+      <input type="radio" id="banner2" class="sec-1-input" name="banner">
+      <input type="radio" id="banner3" class="sec-1-input" name="banner">
+      <input type="radio" id="banner4" class="sec-1-input" name="banner">
+      <div class="slider">
+        <div id="top-banner-1" class="banner">
+          <div class="banner-inner-wrapper header-text">
+            <div class="main-caption">
+              <h2>Transform Your Ideas into Stunning Prints</h2>
+              <h1>High-Quality Printing Services</h1>
+              <div class="border-button"><a href="about">Explore More</a></div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="more-info">
+                    <div class="row">
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-user"></i>
+                        <h4><span>Customers:</span><br>1000+</h4>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-globe"></i>
+                        <h4><span>Color Accuracy:</span><br>99.9%<em></em></h4>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-home"></i>
+                        <h4><span>Quality:</span><br>Vibrant</h4>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <div class="main-button">
+                          <a href="contact">Contact Us</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="top-banner-2" class="banner">
+          <div class="banner-inner-wrapper header-text">
+            <div class="main-caption">
+              <h2>Get Your Prints Today</h2>
+              <h1>UV, Offset, Digital</h1>
+              <div class="border-button"><a href="about">Explore More</a></div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="more-info">
+                    <div class="row">
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-user"></i>
+                        <h4><span>Customers:</span><br>1000+</h4>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-6">
+                      <i class="fa fa-globe"></i>
+                      <h4><span>Color Accuracy:</span><br>99.9%<em></em></h4>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-6">
+                      <i class="fa fa-home"></i>
+                      <h4><span>Quality:</span><br>True-to-Life</h4>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-6">
+                      <div class="main-button">
+                        <a href="contact">Contact Us</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="top-banner-3" class="banner">
+          <div class="banner-inner-wrapper header-text">
+            <div class="main-caption">
+              <h2>Advanced Printing Technology:</h2>
+              <h1>Fully Customizable</h1>
+              <div class="border-button"><a href="about">Explore More</a></div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="more-info">
+                    <div class="row">
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-user"></i>
+                        <h4><span>Customers:</span><br>1000+</h4>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-globe"></i>
+                        <h4><span>Color Accuracy:</span><br>99.9%<em></em></h4>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-home"></i>
+                        <h4><span>Quality:</span><br>Durable</h4>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <div class="main-button">
+                          <a href="contact">Contact Us</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="top-banner-4" class="banner">
+          <div class="banner-inner-wrapper header-text">
+            <div class="main-caption">
+              <h2>We offer a wide range of services:</h2>
+              <h1>Professional Designs</h1>
+              <div class="border-button"><a href="about">Explore More</a></div>
+            </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="more-info">
+                    <div class="row">
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-user"></i>
+                        <h4><span>Customers:</span><br>1000+</h4>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-globe"></i>
+                        <h4><span>Color Accuracy:</span><br>99.9%<em></em></h4>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <i class="fa fa-home"></i>
+                        <h4><span>Quality:</span><br>Long-lasting</h4>
+                      </div>
+                      <div class="col-lg-3 col-sm-6 col-6">
+                        <div class="main-button">
+                          <a href="contact">Contact Us</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <nav>
+        <div class="controls">
+          <label for="banner1"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">1</span></label>
+          <label for="banner2"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">2</span></label>
+          <label for="banner3"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">3</span></label>
+          <label for="banner4"><span class="progressbar"><span class="progressbar-fill"></span></span><span class="text">4</span></label>
+        </div>
+      </nav>
+    </div>
+  </section>
+  <!-- ***** Main Banner Area End ***** -->
+  
+  <div class="visit-country">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-5">
+          <div class="section-heading">
+            <h2>Explore Our Printing Services Now</h2>
+            <p>Browse our wide range of high-quality printing options tailored for your business and personal needs.</p>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="items">
+            <div class="row">
+             <!-- Item 1 -->
+            <div class="col-lg-12 item">
+              <div class="row">
+                <div class="col-lg-4 col-sm-5">
+                  <div class="image">
+                    <img class="border border-info" src='{% static "assets/images/country-01.jpg"%}' alt="Business Card Printing">
+                  </div>
+                </div>
+                <div class="col-lg-8 col-sm-7">
+                  <div class="right-content">
+                    <h4>Zippers</h4>
+                    <span>Professional Printing</span>
+                    <div class="main-button">
+                      <a href="about">Explore More</a>
+                    </div>
+                    <p>We offer high-quality, customizable Zippers to help you make a lasting impression.</p>
+                    <ul class="info">
+                      <li><i class="fa fa-clock"></i> On Time</li>
+                      <li><i class="fa fa-globe"></i> Availabe</li>
+                      <li><i class="fa fa-inr"></i> Best Prices</li>
+                    </ul>
+                    <div class="text-button">
+                      <a href="about">Need Help? <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="col-lg-12 item">
+              <div class="row">
+                <div class="col-lg-4 col-sm-5">
+                  <div class="image">
+                    <img class="border border-info" src='{% static "assets/images/country-02.jpg"%}' alt="Brochure Printing">
+                  </div>
+                </div>
+                <div class="col-lg-8 col-sm-7">
+                  <div class="right-content">
+                    <h4>Pouches</h4>
+                    <span>Custom Printing</span>
+                    <div class="main-button">
+                      <a href="about">Explore More</a>
+                    </div>
+                    <p>Get your Pouches printed with the best quality materials to promote your business.</p>
+                    <ul class="info">
+                      <li><i class="fa fa-check-circle"></i> Best Quality</li>
+                      <li><i class="fa fa-globe"></i> 10+ Options</li>
+                      <li><i class="fa fa-calendar-check"></i> Fast Delivery</li>
+                    </ul>
+                    <div class="text-button">
+                      <a href="about">Need Help? <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="col-lg-12 item">
+              <div class="row">
+                <div class="col-lg-4 col-sm-5">
+                  <div class="image">
+                    <img src='{% static "assets/images/country-03.jpg"%}' alt="Poster & Banner Printing">
+                  </div>
+                </div>
+                <div class="col-lg-8 col-sm-7">
+                  <div class="right-content">
+                    <h4>Posters & Banners</h4>
+                    <span>Large Format Printing</span>
+                    <div class="main-button">
+                      <a href="about">Explore More</a>
+                    </div>
+                    <p>High-quality posters and banners for events or promotions.</p>
+                    <ul class="info">
+                      <li><i class="fa fa-user"></i> Happy Clients</li>
+                      <li><i class="fa fa-handshake"></i> Good Materials</li>
+                      <li><i class="fa fa-inr"></i> Low Cost</li>
+                    </ul>
+                    <div class="text-button">
+                      <a href="about">Need Help? <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Item 4 -->
+            <div class="col-lg-12 item">
+              <div class="row">
+                <div class="col-lg-4 col-sm-5">
+                  <div class="image">
+                    <img class="border border-info" src='{%static "assets/images/country-01.jpg"%}' alt="Business Card Printing">
+                  </div>
+                </div>
+                <div class="col-lg-8 col-sm-7">
+                  <div class="right-content">
+                    <h4>Zippers</h4>
+                    <span>Professional Printing</span>
+                    <div class="main-button">
+                      <a href="about">Explore More</a>
+                    </div>
+                    <p>We offer high-quality, customizable Zippers to help you make a lasting impression.</p>
+                    <ul class="info">
+                      <li><i class="fa fa-clock-o"></i> On Time</li>
+                      <li><i class="fa fa-globe"></i> Availabe</li>
+                      <li><i class="fa fa-home"></i> Best Prices</li>
+                    </ul>
+                    <div class="text-button">
+                      <a href="about">Need Help? <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 5 -->
+            <div class="col-lg-12 item">
+              <div class="row">
+                <div class="col-lg-4 col-sm-5">
+                  <div class="image">
+                    <img class="border border-info" src='{%static "assets/images/country-02.jpg"%}' alt="Brochure Printing">
+                  </div>
+                </div>
+                <div class="col-lg-8 col-sm-7">
+                  <div class="right-content">
+                    <h4>Pouches</h4>
+                    <span>Custom Printing</span>
+                    <div class="main-button">
+                      <a href="about">Explore More</a>
+                    </div>
+                    <p>Get your Pouches printed with the best quality materials to promote your business.</p>
+                    <ul class="info">
+                      <li><i class="fa fa-user"></i> Happy Clients</li>
+                      <li><i class="fa fa-globe"></i> Multiple Options</li>
+                      <li><i class="fa fa-home"></i> Fast Turnaround</li>
+                    </ul>
+                    <div class="text-button">
+                      <a href="about">Need Help? <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Item 6 -->
+            <div class="col-lg-12 item">
+              <div class="row">
+                <div class="col-lg-4 col-sm-5">
+                  <div class="image">
+                    <img src='{%static "assets/images/country-03.jpg"%}' alt="Poster & Banner Printing">
+                  </div>
+                </div>
+                <div class="col-lg-8 col-sm-7">
+                  <div class="right-content">
+                    <h4>Posters & Banners</h4>
+                    <span>Large Format Printing</span>
+                    <div class="main-button">
+                      <a href="about">Explore More</a>
+                    </div>
+                    <p>High-quality posters and banners for events or promotions.</p>
+                    <ul class="info">
+                      <li><i class="fa fa-user"></i> Industry Clients</li>
+                      <li><i class="fa fa-globe"></i> Durable Materials</li>
+                      <li><i class="fa fa-home"></i> Affordable Prices</li>
+                    </ul>
+                    <div class="text-button">
+                      <a href="about">Need Help? <i class="fa fa-arrow-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+  
+  
+              <!-- Add more items if necessary for additional pages -->
+              <!-- Repeat similar structure for Item 6 to Item 15 -->
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="side-bar-map">
+            <div class="row">
+              <div class="col-lg-12">
+                <div id="map">
+                 
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6080.834912099872!2d87.72023758178533!3d24.07302770180214!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f9f70675c643a9%3A0xffe123ad6933642f!2zTWFsbGFycHVyIFlvdXRoIENvbXB1dGVyIFRyYWluaW5nIENlbnRyZSjgpq7gprLgp43gprLgpr7gprDgpqrgp4HgprAg4Kav4KeB4KasIOCmleCmruCnjeCmquCmv-CmieCmn-CmvuCmsCDgpqrgp43gprDgprbgpr_gppXgp43gprfgpqgg4KaV4KeH4Kao4KeN4Kam4KeN4KawKQ!5e1!3m2!1sen!2sin!4v1732953002374!5m2!1sen!2sin" width="100%" height="550px" frameborder="0" style="border:0; border-radius: 23px; " allowfullscreen=""></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Pagination -->
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="page-numbers">
+            <li><a href="#" id="prev"><i class="fa fa-arrow-left"></i></a></li>
+            <li><a href="#" class="page-link" data-page="1">1</a></li>
+            <li><a href="#" class="page-link" data-page="2">2</a></li>
+            <li><a href="#" class="page-link" data-page="3">3</a></li>
+            <li><a href="#" id="next"><i class="fa fa-arrow-right"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const totalPages = 3; // Total pages (3 pages with 3 items per page)
+      let currentPage = 1;  // Start on page 1
+  
+      const pageLinks = document.querySelectorAll('.page-link');
+      const prevButton = document.getElementById('prev');
+      const nextButton = document.getElementById('next');
+  
+      // Function to update the pagination
+      function updatePagination() {
+        // Update active class on page numbers
+        pageLinks.forEach(link => {
+          if (parseInt(link.getAttribute('data-page')) === currentPage) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+  
+        // Disable prev/next buttons when on first/last page
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages;
+      }
+  
+      // Handle page number clicks
+      pageLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          currentPage = parseInt(link.getAttribute('data-page'));
+          updatePagination();
+          loadPage(currentPage);
+        });
+      });
+  
+      // Handle "Previous" button click
+      prevButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (currentPage > 1) {
+          currentPage--;
+          updatePagination();
+          loadPage(currentPage);
+        }
+      });
+  
+      // Handle "Next" button click
+      nextButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (currentPage < totalPages) {
+          currentPage++;
+          updatePagination();
+          loadPage(currentPage);
+        }
+      });
+  
+      // Function to load page content based on the current page
+      function loadPage(page) {
+        const items = document.querySelectorAll('.item');
+        const itemsPerPage = 3; // Change to 3 items per page
+        items.forEach((item, index) => {
+          // Show items for the current page (3 items per page)
+          if (index >= (page - 1) * itemsPerPage && index < page * itemsPerPage) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      }
+  
+      // Initialize pagination
+      updatePagination();
+      loadPage(currentPage); // Load content for page 1
+    });
+  </script>
+    
+{%endblock%}
+  

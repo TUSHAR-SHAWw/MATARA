@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <title>PrintPro Reservation Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/css/templatemo-woox-travel.css">
+    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/animate.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
+
+</head>
+
+<body>
+
+  <!-- ***** Preloader Start ***** -->
+  <div id="js-preloader" class="js-preloader">
+    <div class="preloader-inner">
+      <span class="dot"></span>
+      <div class="dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+  </div>
+  <!-- ***** Preloader End ***** -->
+
+  <!-- ***** Header Area Start ***** -->
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="index.html" class="logo">
+                        <img src="assets/images/logo.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                      <li><a href="index.html" >Home</a></li>
+                      <li><a href="about.html">About</a></li>
+                      <li><a href="pricing.html">Pricing</a></li>
+                      <li><a href="booking.html"class="active">Book Order</a></li>
+                      <li><a href="contact.html">Contact Us</a></li>
+                  </ul>  
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
+            </div>
+        </div>
+    </div>
+  </header>
+  <!-- ***** Header Area End ***** -->
+
+  <div class="second-page-heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <h4>Order Your Print Jobs Here</h4>
+          <h2>Make Your Print Order</h2>
+          <!-- Replaced Lorem Ipsum text with about Ma TARA enterprise -->
+          <p>We are a leading printing company committed to delivering high-quality print products and services. Whether you need business cards, banners, or custom prints, we ensure your vision comes to life with precision and care.</p>
+          <div class="main-button"><a href="about.html">Discover More</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- <div class="more-info reservation-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-phone"></i>
+            <h4>Make a Phone Call</h4>
+            <a href="#">+123 456 789 (0)</a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-envelope"></i>
+            <h4>Contact Us via Email</h4>
+            <a href="#">company@email.com</a>
+          </div>
+        </div>
+        <div class="col-lg-4 col-sm-6">
+          <div class="info-item">
+            <i class="fa fa-map-marker"></i>
+            <h4>Visit Our Office</h4>
+            <a href="#">123 Print Avenue, New York, USA</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <div class="reservation-form">
+    <div class="container">
+      <div class="row">
+        <!-- <div class="col-lg-12">
+          <div id="map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12469.776493332698!2d-80.14036379941481!3d25.907788681148624!2m3!1f357.26927939317244!2f20.870722720054623!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x88d9add4b4ac788f%3A0xe77469d09480fcdb!2sSunny%20Isles%20Beach!5e1!3m2!1sen!2sth!4v1642869952544!5m2!1sen!2sth" width="100%" height="450px" frameborder="0" style="border:0; border-top-left-radius: 23px; border-top-right-radius: 23px;" allowfullscreen=""></iframe>
+          </div>
+        </div> -->
+        <div class="col-lg-12">
+          <form id="reservation-form" name="gs" method="submit" role="search" action="#">
+            <div class="row">
+              <div class="col-lg-12">
+                <h4>Make Your <em>Order</em> Through This <em>Form</em></h4>
+              </div>
+              <div class="col-lg-6">
+                  <fieldset>
+                      <label for="Name" class="form-label">Your Name</label>
+                      <input type="text" name="Name" class="Name" placeholder="Ex. John Doe" autocomplete="on" required>
+                  </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                    <label for="Number" class="form-label">Your Phone Number</label>
+                    <input type="text" name="Number" class="Number" placeholder="Ex. +xxx xxx xxx" autocomplete="on" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-6">
+                  <fieldset>
+                      <label for="chooseGuests" class="form-label">Number Of Prints</label>
+                      <select name="Guests" class="form-select" aria-label="Default select example" id="chooseGuests" onChange="this.form.click()">
+                          
+                          <option selected type="checkbox" name="option1" value="10+">10+</option>
+                          <option value="25+">25+</option>
+                          <option value="50+">50+</option>
+                          <option value="100+">100+</option>
+                          <option value="500+">500+</option>
+                          <option value="1000+">1000+</option>
+                      </select>
+                  </fieldset>
+              </div>
+              <div class="col-lg-6">
+                <fieldset>
+                    <label for="Number" class="form-label">Delivery Date</label>
+                    <input type="date" name="date" class="date" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                  <fieldset>
+                      <label for="chooseProduct" class="form-label">Choose Your Print Product</label>
+                      <select name="Product" class="form-select" aria-label="Default select example" id="chooseCategory" onChange="this.form.click()">
+                        <option value="Puches">Puches</option>
+                        <option value="Zippers">Zippers</option>
+                        <option value="Pan Masala Packet">Pan Masala Packet</option>
+                        <option value="Biri Packet">Biri Packet</option>
+                        <option value="Posters">Posters</option>
+                        <option value="Banners">Banners</option>
+                        <option value="Flyers">Flyers</option>
+                        <option value="Flyers">Other</option>
+                      </select>
+                  </fieldset>
+              </div>
+              <div class="col-lg-12">                        
+                  <fieldset>
+                      <button class="main-button">Make Your Print Order Now</button>
+                  </fieldset>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <p>&copy; 2024 Designed By SatyaNami Infocom. All Rights Reserved.</p>
+            </div>
+            <div class="col-lg-6">
+                <ul class="social-icons">
+                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+
+  <!-- Scripts -->
+  <!-- Bootstrap core JavaScript -->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <script src="assets/js/isotope.min.js"></script>
+  <script src="assets/js/owl-carousel.js"></script>
+  <script src="assets/js/wow.js"></script>
+  <script src="assets/js/tabs.js"></script>
+  <script src="assets/js/popup.js"></script>
+  <script src="assets/js/custom.js"></script>
+
+  <script>
+    $(".option").click(function(){
+      $(".option").removeClass("active");
+      $(this).addClass("active"); 
+    });
+  </script>
+
+</body>
+
+</html>
