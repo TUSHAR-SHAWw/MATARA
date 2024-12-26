@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+ 
+
+  <div class="reservation-form mt-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <form method="POST" action="{% url 'MAIN:login' %}" id="reservation-form">
+            {% csrf_token %}
+            <div class="row">
+              <div class="col-lg-12">
+                <h4>Login to <em>Your Account</em></h4>
+              </div>
+              {% if messages %}
+              <div class="alert alert-danger mt-3">
+                <ul>
+                  {% for message in messages %}
+                    <li>{{ message }}</li>
+                  {% endfor %}
+                </ul>
+              </div>
+            {% endif %}
+              <div class="col-lg-12">
+                <fieldset>
+                  <label for="username" class="form-label">Username</label>
+                  <input type="text" name="username" class="name" placeholder="Enter Your Username" autocomplete="on" required>
+                </fieldset>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <label for="password" class="form-label">Password</label>
+                  <input type="password" name="password" class="form-control" placeholder="Enter Your Password" autocomplete="on" required>
+                </fieldset>
+              </div>
+              <div class="mt-1 mb-3">
+                <p>Don't have an account? <a href="{% url 'MAIN:index' %}">Register here</a>.</p>
+              </div>
+              <div class="col-lg-12">
+                <fieldset>
+                  <button type="submit" class="main-button">Login</button>
+                </fieldset>
+              </div>
+            </div>
+          </form>
+
+        
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -19,6 +19,8 @@ class Product(models.Model):
         choices=CATEGORY_CHOICES,
         default='C',  # Default category
     )
+    size = models.CharField(max_length=50, null=True, blank=True)  # Optional size field for products like T-shirts, posters
+    material = models.CharField(max_length=100, null=True, blank=True)  # Material type for products like T-shirts
     image = models.ImageField(upload_to='products/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -38,7 +40,7 @@ class Order(models.Model):
         ('D', 'Delivered'),
         ('CXL', 'Cancelled'),
     ]
-
+    
     customer = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -48,6 +50,8 @@ class Order(models.Model):
         default='P',  # Default status
     )
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    gst_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Total GST for the order
+    discount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Discount applied to the order
     shipping_address = models.TextField()
     shipping_method = models.CharField(max_length=255, null=True, blank=True)
     payment_status = models.CharField(max_length=50, default='Pending')
@@ -56,7 +60,18 @@ class Order(models.Model):
         return f"Order #{self.id} by {self.customer.username}"
     
     def calculate_total(self):
+        # Calculate total without GST
         self.total_amount = sum(item.get_total_price() for item in self.items.all())
+        
+        # Calculate GST for the whole order based on the items' GST amounts
+        self.gst_amount = sum(item.gst_amount for item in self.items.all())
+        
+        # Apply discount if applicable
+        if self.discount:
+            self.total_amount -= self.discount
+        
+        # Add GST to the total amount
+        self.total_amount += self.gst_amount
         self.save()
 
     def is_paid(self):
@@ -68,12 +83,19 @@ class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField()
     unit_price = models.DecimalField(max_digits=10, decimal_places=2)
-
+    gst_rate = models.DecimalField(max_digits=5, decimal_places=2, default=18.0)  # GST rate (e.g., 18%)
+    gst_amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # GST for this item
+    
     def __str__(self):
         return f"{self.product.name} x {self.quantity}"
 
     def get_total_price(self):
         return self.quantity * self.unit_price
+
+    def calculate_gst(self):
+        # GST for this item
+        self.gst_amount = (self.get_total_price() * self.gst_rate) / 100
+        self.save()
 
 
 class Shipping(models.Model):
@@ -84,6 +106,8 @@ class Shipping(models.Model):
     estimated_delivery_date = models.DateTimeField(null=True, blank=True)
     tracking_number = models.CharField(max_length=255, null=True, blank=True)
     shipping_status = models.CharField(max_length=50, default='Not Shipped')
+    courier = models.CharField(max_length=100, null=True, blank=True)  # Courier service used
+    shipping_cost = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # Shipping cost
 
     def __str__(self):
         return f"Shipping for Order #{self.order.id}"
@@ -119,6 +143,8 @@ class Payment(models.Model):
     payment_method = models.CharField(max_length=50)
     payment_date = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=50, default='Pending')
+    transaction_id = models.CharField(max_length=255, null=True, blank=True)  # Optional transaction ID
+    gateway = models.CharField(max_length=100, null=True, blank=True)  # Optional payment gateway (e.g., Stripe, PayPal)
 
     def __str__(self):
         return f"Payment for Order #{self.order.id} - {self.status}"

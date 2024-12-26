@@ -56,6 +56,41 @@
       </div>
     </div>
   </div> 
+  <header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <a href="{% url 'MAIN:index' %}" class="logo">
+                        <img src="{% static 'assets/images/logo.png' %}" alt="">
+                    </a>
+                    <ul class="nav">
+                      <li>
+                        <a href="{% url 'MAIN:index' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'MAIN:about' %}" class="{% if request.path == '/about/' %}active{% endif %}">About</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'MAIN:pricing' %}" class="{% if request.path == '/pricing/' %}active{% endif %}">Pricing</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'MAIN:order' %}" class="{% if request.path == '/order/' %}active{% endif %}">Book Order</a>
+                      </li>
+                      <li>
+                        <a href="{% url 'MAIN:contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">Contact Us</a>
+                      </li>
+                    </ul>  
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+
+
   <!-- ***** Preloader End ***** -->
 
   <!-- ***** Header Area Start ***** -->

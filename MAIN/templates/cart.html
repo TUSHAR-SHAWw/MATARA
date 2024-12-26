@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+  <h2>Your Cart</h2>
+
+  {% if cart.items.count %}
+    <!-- Cart Table -->
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Price</th>
+          <th>Total</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart.items.all %}
+        <tr>
+          <td>
+            <div class="d-flex align-items-center">
+              {% if item.product.image %}
+              <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" class="img-thumbnail" style="width: 60px; height: 60px; object-fit: cover;">
+              {% endif %}
+              <span class="ml-3">{{ item.product.name }}</span>
+            </div>
+          </td>
+          <td>
+            <!-- Quantity Update Form -->
+            <form method="POST" action="{% url 'cart:update_quantity' cart_item_id=item.id %}">
+              {% csrf_token %}
+              <div class="input-group">
+                <input type="number" name="quantity" class="form-control" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}" required>
+                <div class="input-group-append">
+                  <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                </div>
+              </div>
+            </form>
+          </td>
+          <td>₹{{ item.product.price }}</td>
+          <td>₹{{ item.get_total_price }}</td>
+          <td>
+            <a href="{% url 'cart:remove_from_cart' cart_item_id=item.id %}" class="btn btn-danger btn-sm">Remove</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <!-- Cart Total Section -->
+    <div class="cart-total mt-4 d-flex justify-content-between align-items-center">
+      <h4>Total: ₹{{ cart.get_total_price }}</h4>
+      <a href="{% url 'order:checkout' %}" class="btn btn-success btn-lg">Proceed to Checkout</a>
+    </div>
+
+  {% else %}
+    <!-- Empty Cart Message -->
+    <div class="alert alert-info mt-4">
+      <p>Your cart is empty!</p>
+      <a href="{% url 'MAIN:index' %}" class="btn btn-info">Browse Products</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

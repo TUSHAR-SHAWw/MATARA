@@ -1,35 +1,6 @@
 {% extends 'base.html' %}
 {% block content%}
 {% load static %}
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="{% url 'MAIN:index' %}" class="logo">
-                        <img src="{% static 'assets/images/logo.png'%}" alt="">
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                      <li><a href="{% url 'MAIN:index' %}" >Home</a></li>
-                      <li><a href="{% url 'MAIN:about' %}"  >About</a></li>
-                      <li><a href="{% url 'MAIN:pricing' %}" >Pricing</a></li>
-                      <li><a href="{% url 'MAIN:order' %}">Book Order</a></li>
-                      <li><a href="{% url 'MAIN:contact' %}" class="active">Contact Us</a></li>
-                  </ul>  
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
-            </div>
-        </div>
-    </div>
-  </header>
-  <!-- ***** Header Area End ***** -->
 
   <div class="second-page-heading contact">
     <div class="container">

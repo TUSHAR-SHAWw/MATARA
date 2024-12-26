@@ -189,3 +189,47 @@
     -webkit-text-stroke-width: 1px !important;
             -webkit-text-stroke-color: black !important;
 }
+.login-form {
+  background-color: #f9f9f9;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h2 {
+  margin-bottom: 30px;
+  font-size: 24px;
+}
+
+.login-form .form-group {
+  margin-bottom: 20px;
+}
+
+.login-form label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  display: block;
+}
+
+.login-form .main-button {
+  width: 100%;
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.login-form .main-button:hover {
+  background-color: #0056b3;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 5px;
+  margin-top: 10px;
+}
