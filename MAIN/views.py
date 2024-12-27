@@ -1,17 +1,69 @@
-from .models import Cart, CartItem
-from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth.views import LoginView
+from .models import Cart, CartItem, Order, UserProfile
+from .forms import CustomLoginForm, RegisterForm
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
-from .forms import CustomLoginForm
+from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
 from django.http import HttpResponse
-from .models import Order
-from django.shortcuts import render, redirect
 from django.core.exceptions import ValidationError
+from django.contrib.auth.models import User
+from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
+from django.contrib.auth.models import User
+from django.contrib import messages
+from django.shortcuts import render, redirect
+from .forms import RegisterForm
+from .models import UserProfile
+
+def register(request):
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        if form.is_valid():
+            # Get the form data
+            user = form.save(commit=False)  # Don't save the user immediately
+            phone = form.cleaned_data.get('phone')
+            email = form.cleaned_data.get('email')
+            username = form.cleaned_data.get('username')
+
+            # Check if the username already exists
+            if username and User.objects.filter(username=username).exists():
+                messages.error(request, 'Username is already taken')
+                return redirect('MAIN:register')
+
+            # Check if the email is already registered
+            if email and User.objects.filter(email=email).exists():
+                messages.error(request, 'Email is already registered')
+                return redirect('MAIN:register')
+
+            # Check if the phone number is already registered
+            if phone and UserProfile.objects.filter(phone=phone).exists():
+                messages.error(request, 'Phone number is already registered')
+                return redirect('MAIN:register')
+
+            # Save the user object
+            user.save()
+
+            # If a phone number was provided, create or update the user profile
+            if phone:
+                # Use `get_or_create` to avoid issues with non-existent profiles
+                profile, created = UserProfile.objects.get_or_create(user=user)
+                profile.phone = phone
+                profile.save()
+
+            messages.success(request, 'Your account has been created successfully!')
+            return redirect('MAIN:login')  # Redirect to login page after successful registration
+
+        else:
+            messages.error(request, 'Please correct the errors below.')
+    else:
+        form = RegisterForm()
+
+    return render(request, 'register.html', {'form': form})
 def login_view(request):
     # If the user is already authenticated, redirect them to the home page
     if request.user.is_authenticated:
@@ -81,7 +133,8 @@ def index(request):
     return render(request, 'index.html')
 
 def about(request):
-    return render(request, 'about.html')
+    products = Product.objects.all()
+    return render(request, 'about.html',{'products': products})
 def order(request):
     return render(request, 'booking.html')
 

@@ -66,21 +66,31 @@
                     </a>
                     <ul class="nav">
                       <li>
-                        <a href="{% url 'MAIN:index' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a>
+                          <a href="{% url 'MAIN:index' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a>
                       </li>
                       <li>
-                        <a href="{% url 'MAIN:about' %}" class="{% if request.path == '/about/' %}active{% endif %}">About</a>
+                          <a href="{% url 'MAIN:about' %}" class="{% if request.path == '/about/' %}active{% endif %}">About</a>
                       </li>
                       <li>
-                        <a href="{% url 'MAIN:pricing' %}" class="{% if request.path == '/pricing/' %}active{% endif %}">Pricing</a>
+                          <a href="{% url 'MAIN:pricing' %}" class="{% if request.path == '/pricing/' %}active{% endif %}">Pricing</a>
                       </li>
                       <li>
-                        <a href="{% url 'MAIN:order' %}" class="{% if request.path == '/order/' %}active{% endif %}">Book Order</a>
+                          <a href="{% url 'MAIN:order' %}" class="{% if request.path == '/order/' %}active{% endif %}">Book Order</a>
                       </li>
                       <li>
-                        <a href="{% url 'MAIN:contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">Contact Us</a>
+                          <a href="{% url 'MAIN:contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">Contact Us</a>
                       </li>
-                    </ul>  
+                      {% if user.is_authenticated %}
+                          <li>
+                              <a href="{% url 'MAIN:logout' %}" class="{% if request.path == '/logout/' %}active{% endif %}">Logout</a>
+                          </li>
+                      {% else %}
+                          <li>
+                              <a href="{% url 'MAIN:login' %}" class="{% if request.path == '/login/' %}active{% endif %}">Login</a>
+                          </li>
+                      {% endif %}
+                  </ul>
+                  
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
