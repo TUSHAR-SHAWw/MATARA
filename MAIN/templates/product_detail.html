@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<section class="product-detail-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <!-- Product Image -->
+                <div class="product-image">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <!-- Product Details -->
+                <div class="product-info">
+                    <h2>{{ product.name }}</h2>
+                    <p><strong>Category:</strong> {{ product.category }}</p>
+                    <p><strong>Description:</strong> {{ product.description }}</p>
+                    <p><strong>Price:</strong> ₹{{ product.price }}</p>
+
+                    <!-- Add to Cart Button -->
+                    <form method="POST" action="{% url 'MAIN:add_to_cart' product.id %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Similar Products Section -->
+<section class="similar-products">
+    <div class="container">
+        <h3>You may also like</h3>
+        <div class="row">
+            {% for similar_product in products %}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="product-card">
+                    <img src="{{ similar_product.image.url }}" alt="{{ similar_product.name }}" class="img-fluid">
+                    <h4>{{ similar_product.name }}</h4>
+                    <p>₹{{ similar_product.price }}</p>
+                    <a href="{% url 'MAIN:product_detail' similar_product.id %}" class="btn btn-outline-primary">View Details</a>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

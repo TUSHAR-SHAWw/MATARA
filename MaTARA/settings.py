@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'MAIN'
 ]
 
@@ -125,7 +126,7 @@ AUTHENTICATION_BACKENDS = [
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
-    BASE_DIR / "static",  # This is for global static files (optional)
+    BASE_DIR / "MAIN/static",  # This is for global static files (optional)
 ]
 STATIC_ROOT = BASE_DIR / "staticfiles"  # Folder where collected static files will be stored (used for production)
 BASE_DIR = Path(__file__).resolve().parent.parent

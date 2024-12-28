@@ -1,5 +1,4 @@
-from .models import Cart, CartItem, Order, UserProfile
-from .forms import CustomLoginForm, RegisterForm
+from .forms import *
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import LoginView
@@ -13,12 +12,8 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
-from django.contrib.auth.models import User
-from django.contrib import messages
-from django.shortcuts import render, redirect
-from .forms import RegisterForm
-from .models import UserProfile
+from .models import *
+from django.shortcuts import render, get_object_or_404
 
 def register(request):
     if request.method == 'POST':
@@ -29,10 +24,14 @@ def register(request):
             phone = form.cleaned_data.get('phone')
             email = form.cleaned_data.get('email')
             username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password1')  # Get the password from the form
 
             # Check if the username already exists
             if username and User.objects.filter(username=username).exists():
                 messages.error(request, 'Username is already taken')
+                return redirect('MAIN:register')
+            if form.cleaned_data.get('password1')!=form.cleaned_data.get('password2'):
+                messages.error(request, 'Enter a Matching Password')
                 return redirect('MAIN:register')
 
             # Check if the email is already registered
@@ -44,6 +43,9 @@ def register(request):
             if phone and UserProfile.objects.filter(phone=phone).exists():
                 messages.error(request, 'Phone number is already registered')
                 return redirect('MAIN:register')
+
+            # Set the password manually using set_password to hash it
+            user.set_password(password)
 
             # Save the user object
             user.save()
@@ -64,6 +66,7 @@ def register(request):
         form = RegisterForm()
 
     return render(request, 'register.html', {'form': form})
+
 def login_view(request):
     # If the user is already authenticated, redirect them to the home page
     if request.user.is_authenticated:
@@ -128,9 +131,14 @@ def generate_gst_bill(request, order_id):
     response['Content-Disposition'] = f'attachment; filename="GST_Bill_{order.id}.pdf"'
     return response
 
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    products = Product.objects.all()
+    return render(request, 'product_detail.html', {'product': product,'products': products})
 
 def index(request):
-    return render(request, 'index.html')
+    products = Product.objects.all()
+    return render(request, 'index.html' ,{'products': products})
 
 def about(request):
     products = Product.objects.all()
@@ -144,6 +152,23 @@ def contact(request):
     return render(request, 'contact.html')
 
 
+@login_required
+def add_to_cart(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    cart, created = Cart.objects.get_or_create(customer=request.user)
+
+    # Check if the product is already in the cart
+    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+
+    # Update the quantity if already in cart, else set to 1
+    if not created:
+        cart_item.quantity += 1
+        cart_item.save()
+    else:
+        cart_item.quantity = 1
+        cart_item.save()
+
+    return redirect('cart:view')
 
 @login_required
 def cart_view(request):
