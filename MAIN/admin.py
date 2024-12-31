@@ -1,7 +1,7 @@
 from django.contrib import admin
 # admin.py
 
-from .models import Product, Order, OrderItem, Shipping, Cart, CartItem, Payment
+from .models import *
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ('name', 'category', 'price', 'stock', 'created_at', 'updated_at')
@@ -29,14 +29,30 @@ class CartAdmin(admin.ModelAdmin):
     list_display = ('customer', 'created_at', 'updated_at')
     inlines = [CartItemInline]
 
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('name', 'description')
+    
+
 class PaymentAdmin(admin.ModelAdmin):
     list_display = ('order', 'amount', 'payment_method', 'payment_date', 'status')
     list_filter = ('status',)
+
+class ContactAdmin(admin.ModelAdmin):
+    # Define the fields to display in the list view
+    list_display = ('name', 'phone_number', 'number_of_prints', 'delivery_date', 'product', 'delivery_location')
+    
+    # Add search functionality to the admin panel
+    search_fields = ('name', 'phone_number', 'product')
+    
+    # Optionally, add filter options in the sidebar
+    list_filter = ('delivery_location', 'product')
 
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Shipping, ShippingAdmin)
 admin.site.register(Cart, CartAdmin)
 admin.site.register(Payment, PaymentAdmin)
+admin.site.register(Contact)
+admin.site.register(Category)
 
 # Register your models here.

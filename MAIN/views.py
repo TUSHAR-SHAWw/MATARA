@@ -15,6 +15,47 @@ from django.dispatch import receiver
 from .models import *
 from django.shortcuts import render, get_object_or_404
 
+from django.core.paginator import Paginator
+from django.shortcuts import render
+from .models import Product, Category
+from .forms import ProductSearchForm
+
+def pricing(request):
+    products = Product.objects.all()  # Default to showing all products
+    form = ProductSearchForm(request.GET)
+    
+    if form.is_valid():
+        category_id = form.cleaned_data.get('category')
+        price = form.cleaned_data.get('price')
+
+        # Filter by category if selected
+        if category_id:
+            products = products.filter(category_id=category_id)
+        
+        # Filter by price if selected
+        if price:
+            if price == '100':
+                products = products.filter(price__gte=100, price__lte=250)
+            elif price == '250':
+                products = products.filter(price__gte=250, price__lte=500)
+            elif price == '500':
+                products = products.filter(price__gte=500, price__lte=1000)
+            elif price == '1000':
+                products = products.filter(price__gte=1000, price__lte=2500)
+            elif price == '2500+':
+                products = products.filter(price__gte=2500)
+        
+        # Optionally, filter by in-stock products only
+        products = products.filter(stock__gt=0)
+
+    # Apply pagination: Show only 20 products per page
+    paginator = Paginator(products, 20)  # Show 20 products per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    return render(request, 'pricing.html', {'form': form, 'page_obj': page_obj})
+
+
 def register(request):
     if request.method == 'POST':
         form = RegisterForm(request.POST)
@@ -141,15 +182,49 @@ def index(request):
     return render(request, 'index.html' ,{'products': products})
 
 def about(request):
-    products = Product.objects.all()
+    products = Category.objects.all()
     return render(request, 'about.html',{'products': products})
 def order(request):
     return render(request, 'booking.html')
 
-def pricing(request):
-    return render(request, 'pricing.html')
+
+
 def contact(request):
-    return render(request, 'contact.html')
+    success_message = None
+
+    if request.method == 'POST':
+        # Get data from the form
+        name = request.POST.get('name')
+        phone_number = request.POST.get('phone_number')
+        number_of_prints = request.POST.get('number_of_prints')
+        delivery_date = request.POST.get('delivery_date')
+        address = request.POST.get('address')
+        product = request.POST.get('product')
+        delivery_location = request.POST.get('delivery_location')
+
+        # Simple form validation (you can add more validation as needed)
+        if not name or not phone_number or not number_of_prints or not delivery_date or not address or not product or not delivery_location:
+            return HttpResponse("All fields are required.", status=400)
+
+        # Save the data in the Contact model
+        contact = Contact(
+            name=name,
+            phone_number=phone_number,
+            number_of_prints=number_of_prints,
+            delivery_date=delivery_date,
+            address=address,
+            product=product,
+            delivery_location=delivery_location
+        )
+        contact.save()
+
+        # Display a success message
+        success_message = "Your contact request has been submitted successfully!"
+        
+        # After successful submission, you could either redirect or just clear the form
+        return render(request, 'contact.html', {'success_message': success_message})
+    
+    return render(request, 'contact.html', {'success_message': success_message})
 
 
 @login_required

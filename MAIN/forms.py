@@ -3,6 +3,29 @@ from django.contrib.auth.models import User
 from .models import UserProfile
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm
+from .models import *
+
+class ProductSearchForm(forms.Form):
+    # Get categories from the database
+    category_choices = [(category.id, category.name) for category in Category.objects.all()]
+    
+    CATEGORY_CHOICES = [('','Select Category')] + category_choices
+    
+    PRICE_CHOICES = [
+        ('100', '₹100 - ₹250'),
+        ('250', '₹250 - ₹500'),
+        ('500', '₹500 - ₹1,000'),
+        ('1000', '₹1,000 - ₹2,500'),
+        ('2500+', '₹2,500+'),
+    ]
+    
+    category = forms.ChoiceField(choices=CATEGORY_CHOICES, required=False)
+    price = forms.ChoiceField(choices=PRICE_CHOICES, required=False)
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ['name', 'phone_number', 'number_of_prints', 'delivery_date', 'address', 'product', 'delivery_location']
 
 class CustomLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Your Username'}))

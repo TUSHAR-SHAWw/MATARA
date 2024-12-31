@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
-{% block content%}
+{% block content %}
 {% load static %}
+<style>
+  .product-item p {
+    word-wrap: break-word; /* Break long words to prevent overflow */
+    overflow: hidden;      /* Hide any overflow */
+    text-overflow: ellipsis; /* Show ellipsis ("...") if the text overflows */
+    max-height: 150px;     /* Set a max height if you want to restrict the visible height */
+    display: -webkit-box;  /* For multi-line truncation in Webkit browsers */
+    -webkit-line-clamp: 5; /* Limit the number of visible lines to 5 */
+    -webkit-box-orient: vertical; /* Set the orientation of the box to vertical for line-clamping */
+}
+</style>
+
 
   <div class="page-heading">
     <div class="container">
@@ -18,34 +30,30 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
-          <form id="search-form" name="gs" method="submit" role="search" action="#">
+          <form id="search-form" method="get" role="search" action="{% url 'MAIN:pricing' %}">
             <div class="row">
               <div class="col-lg-2">
                 <h4>Sort Print Deals By:</h4>
               </div>
               <div class="col-lg-4">
                 <fieldset>
-                  <select name="Location" class="form-select" aria-label="Default select example" id="chooseLocation" onChange="this.form.click()">
-                    
-                    <option value="Brochures">Puches</option>
-                    <option value="Stickers">Zippers</option>
-                    <option value="Catalogs">Pan Masala Packet</option>
-                    <option value="Custom Prints">Biri Packet</option>
-                    <option value="Posters">Posters</option>
-                    <option value="Banners">Banners</option>
-                    <option value="Flyers">Flyers</option>
+                  <select name="category" class="form-select" aria-label="Select Category">
+                    <option value="">Select Category</option>
+                    {% for category in form.category.field.choices %}
+                      <option value="{{ category.0 }}" {% if category.0 == form.category.value %} selected {% endif %}>{{ category.1 }}</option>
+                    {% endfor %}
                   </select>
                 </fieldset>
               </div>
               <div class="col-lg-4">
                 <fieldset>
-                  <select name="Price" class="form-select" aria-label="Default select example" id="choosePrice" onChange="this.form.click()">
-                    <option selected>Price Range</option>
-                    <option value="100">₹100 - ₹250</option>
-                    <option value="250">₹250 - ₹500</option>
-                    <option value="500">₹500 - ₹1,000</option>
-                    <option value="1000">₹1,000 - ₹2,500</option>
-                    <option value="2500+">₹2,500+</option>
+                  <select name="price" class="form-select" aria-label="Select Price Range">
+                    <option value="">Price Range</option>
+                    <option value="100" {% if form.price.value == "100" %} selected {% endif %}>₹100 - ₹250</option>
+                    <option value="250" {% if form.price.value == "250" %} selected {% endif %}>₹250 - ₹500</option>
+                    <option value="500" {% if form.price.value == "500" %} selected {% endif %}>₹500 - ₹1,000</option>
+                    <option value="1000" {% if form.price.value == "1000" %} selected {% endif %}>₹1,000 - ₹2,500</option>
+                    <option value="2500+" {% if form.price.value == "2500+" %} selected {% endif %}>₹2,500+</option>
                   </select>
                 </fieldset>
               </div>
@@ -60,7 +68,54 @@
       </div>
     </div>
   </div>
-  
+
+  <div class="search-results amazing-deals">
+    <div class="container">
+      <div class="row">
+        {% for product in page_obj %}
+        {% if product.image %}
+          <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+        {% else %}
+          <img src="{% static 'default_image.jpg' %}" alt="Default Image" class="img-fluid">
+        {% endif %}
+          <div class="col-lg-4">
+            <div class="product-item">
+              <h4>{{ product.name }}</h4>
+              <div class="product-description">
+                <p>{{ product.description }}</p>
+              </div>
+              <p>Price: ₹{{ product.price }}</p>
+              <p>Category: {{ product.category.name }}</p>
+              <p>In Stock: {% if product.is_in_stock %} Yes {% else %} No {% endif %}</p>
+              
+            </div>
+          </div>
+        {% empty %}
+          <p>No products found matching your search criteria.</p>
+        {% endfor %}
+      </div>
+
+      <!-- Pagination -->
+      <div class="col-lg-12">
+        <ul class="page-numbers">
+          {% if page_obj.has_previous %}
+            <li><a href="?page=1{% if form.category.value %}&category={{ form.category.value }}{% endif %}{% if form.price.value %}&price={{ form.price.value }}{% endif %}"><i class="fa fa-arrow-left"></i></a></li>
+            <li><a href="?page={{ page_obj.previous_page_number }}{% if form.category.value %}&category={{ form.category.value }}{% endif %}{% if form.price.value %}&price={{ form.price.value }}{% endif %}">1</a></li>
+          {% endif %}
+
+          <li class="active"><a href="#">{{ page_obj.number }}</a></li>
+
+          {% if page_obj.has_next %}
+            <li><a href="?page={{ page_obj.next_page_number }}{% if form.category.value %}&category={{ form.category.value }}{% endif %}{% if form.price.value %}&price={{ form.price.value }}{% endif %}">{{ page_obj.next_page_number }}</a></li>
+            <li><a href="?page={{ page_obj.paginator.num_pages }}{% if form.category.value %}&category={{ form.category.value }}{% endif %}{% if form.price.value %}&price={{ form.price.value }}{% endif %}"><i class="fa fa-arrow-right"></i></a></li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+
 
   <div class="amazing-deals">
     <div class="container">
@@ -213,21 +268,4 @@
     </div>
   </div>
   
-
-  <div class="call-to-action">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                <h2>Ready to Bring Your Ideas to Life?</h2>
-                <p>Whether you need custom business cards, brochures, posters, or any other print materials, we are here to help.</p>
-            </div>
-            <div class="col-lg-4">
-                <div class="main-button">
-                    <a href="contact.html">Request a Demo</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-
 {%endblock%}

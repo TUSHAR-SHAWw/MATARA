@@ -1,28 +1,81 @@
 {% extends 'base.html' %}
 {% block content %}
 {% load static %}
+<style>
+    /* Adjust font sizes for category, price, and description */
+    .product-category, .product-price, .product-description {
+        font-size: 1.25rem; /* Larger font size */
+        line-height: 1.5; /* Increase line spacing */
+        margin-bottom: 1rem; /* Space between lines */
+        word-wrap: break-word; /* Ensure long words break properly */
+    }
 
-<section class="product-detail-section">
+    .product-description {
+        max-height: 10em; /* Limit to 3 lines (approx) */
+        overflow: hidden; /* Hide overflowed text */
+        text-overflow: ellipsis; /* Add '...' at the end of cut-off text */
+        display: -webkit-box;
+        -webkit-line-clamp: 5; /* Display 3 lines of description */
+        -webkit-box-orient: vertical;
+    }
+
+    .product-info {
+        padding-left: 20px; /* Adds padding to the left side for better readability */
+        word-wrap: break-word; /* Ensures text does not overflow */
+    }
+
+    .product-name {
+        font-size: 2rem; /* Larger font size for product name */
+        margin-bottom: 1rem;
+        word-wrap: break-word; /* Prevent overflow */
+    }
+
+    .product-price {
+        font-size: 1.5rem; /* Increase price size */
+        font-weight: bold;
+    }
+
+    .row {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    /* Ensures proper wrapping of the product info and image section */
+    .col-lg-6 {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    /* Optional: Style adjustments for the "Add to Cart" button */
+    .btn-lg {
+        font-size: 1.1rem; /* Slightly larger button text */
+        padding: 12px 20px; /* Bigger padding for the button */
+    }
+</style>
+
+<!-- Product Detail Section -->
+<section class="product-detail-section py-5">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
-                <!-- Product Image -->
+            <!-- Product Image -->
+            <div class="col-lg-6 mb-4 mb-lg-0">
                 <div class="product-image">
-                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded shadow-lg">
                 </div>
             </div>
+            <!-- Product Information -->
             <div class="col-lg-6">
-                <!-- Product Details -->
                 <div class="product-info">
-                    <h2>{{ product.name }}</h2>
-                    <p><strong>Category:</strong> {{ product.category }}</p>
-                    <p><strong>Description:</strong> {{ product.description }}</p>
-                    <p><strong>Price:</strong> ₹{{ product.price }}</p>
+                    <h2 class="product-name">{{ product.name }}</h2>
+                    <p class="product-category"><strong>Category:</strong><br> {{ product.category }}</p>
+                    <p class="product-description"><strong>Description:</strong><br> {{ product.description }}</p>
+                    <p class="product-price"><strong>Price :</strong><br> ₹{{ product.price }} PC</p>
 
                     <!-- Add to Cart Button -->
                     <form method="POST" action="{% url 'MAIN:add_to_cart' product.id %}">
                         {% csrf_token %}
-                        <button type="submit" class="btn btn-primary">Add to Cart</button>
+                        <button type="submit" class="btn btn-primary btn-lg mt-3">Add to Cart</button>
                     </form>
                 </div>
             </div>
@@ -31,17 +84,19 @@
 </section>
 
 <!-- Similar Products Section -->
-<section class="similar-products">
+<section class="similar-products py-5 bg-light">
     <div class="container">
-        <h3>You may also like</h3>
+        <h3 class="section-title mb-4 text-center">You may also like</h3>
         <div class="row">
             {% for similar_product in products %}
-            <div class="col-lg-3 col-md-4 col-sm-6">
-                <div class="product-card">
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div class="product-card rounded shadow-sm overflow-hidden">
                     <img src="{{ similar_product.image.url }}" alt="{{ similar_product.name }}" class="img-fluid">
-                    <h4>{{ similar_product.name }}</h4>
-                    <p>₹{{ similar_product.price }}</p>
-                    <a href="{% url 'MAIN:product_detail' similar_product.id %}" class="btn btn-outline-primary">View Details</a>
+                    <div class="product-card-body p-3">
+                        <h5 class="product-card-title">{{ similar_product.name }}</h5>
+                        <p class="product-card-price">₹{{ similar_product.price }}</p>
+                        <a href="{% url 'MAIN:product_detail' similar_product.id %}" class="btn btn-outline-primary btn-sm">View Details</a>
+                    </div>
                 </div>
             </div>
             {% endfor %}

@@ -1,8 +1,32 @@
 {% extends 'base.html' %}
-{% block content%}
+{% block content %}
 {% load static %}
+{% if success_message %}
+  <div id="success-message" class="alert alert-success mb-5" 
+       style="position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 1050; opacity: 1; 
+              transition: opacity 1s; padding: 15px; margin: 0; max-width: 80%; 
+              box-shadow: 0 4px 8px rgba(0,0,0,0.2); border-radius: 5px;">
+    {{ success_message }}
+  </div>
 
-  <div class="second-page-heading contact">
+  <script type="text/javascript">
+    // JavaScript to hide the success message after 5 seconds
+    setTimeout(function() {
+      var successMessage = document.getElementById('success-message');
+      if (successMessage) {
+        successMessage.style.transition = 'opacity 1s';
+        successMessage.style.opacity = '0'; // Fade out the success message
+        setTimeout(function() {
+          successMessage.style.display = 'none'; // Hide after fade-out
+        }, 1000); // Wait for the fade-out transition to finish
+      }
+    }, 5000); // 5 seconds delay before starting the fade-out
+  </script>
+{% endif %}
+
+
+
+<div class="second-page-heading contact">
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
@@ -15,122 +39,125 @@
     </div>
 </div>
 
-
-  <div class="more-info reservation-info">
+<div class="more-info reservation-info">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-4 col-sm-6">
-          <div class="info-item">
-            <i class="fa fa-phone"></i>
-            <h4>Make a Phone Call</h4>
-            <a href="#">+91-2322 456 789</a>
-          </div>
+        <div class="row">
+            <div class="col-lg-4 col-sm-6">
+                <div class="info-item">
+                    <i class="fa fa-phone"></i>
+                    <h4>Make a Phone Call</h4>
+                    <a href="#">+91-2322 456 789</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="info-item">
+                    <i class="fa fa-envelope"></i>
+                    <h4>Contact Us via Email</h4>
+                    <a href="#">company@email.com</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-sm-6">
+                <div class="info-item">
+                    <i class="fa fa-map-marker"></i>
+                    <h4>Visit Our Office</h4>
+                    <a href="#">Petrol Pump Road, Mallarpur, India</a>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-4 col-sm-6">
-          <div class="info-item">
-            <i class="fa fa-envelope"></i>
-            <h4>Contact Us via Email</h4>
-            <a href="#">company@email.com</a>
-          </div>
-        </div>
-        <div class="col-lg-4 col-sm-6">
-          <div class="info-item">
-            <i class="fa fa-map-marker"></i>
-            <h4>Visit Our Office</h4>
-            <a href="#">Petrol Pump Road, Mallarpur, India</a>
-          </div>
-        </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  <div class="reservation-form">
+
+
+<div class="reservation-form">
     <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <div id="map">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3642.7410243798927!2d87.72769687440257!3d24.07542277622269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f9f706edb080f7%3A0xc043f9ee4850b993!2sMollarpur%20Baina%20More%20Bus%20Stop!5e0!3m2!1sen!2sin!4v1732521322127!5m2!1sen!2sin" width="100%" height="450px" frameborder="0" style="border:0; border-top-left-radius: 23px; border-top-right-radius: 23px;" allowfullscreen=""></iframe>
-          </div>
-        </div>
-        <div class="col-lg-12">
-          <form id="reservation-form" name="gs" method="submit" role="search" action="#">
-            <div class="row">
-              <div class="col-lg-12">
-                <h4>Contact <em>US</em> Through This <em>Form</em></h4>
-              </div>
-              <div class="col-lg-6">
-                  <fieldset>
-                      <label for="Name" class="form-label">Your Name</label>
-                      <input type="text" name="Name" class="Name" placeholder="Type Your Name" autocomplete="on" required>
-                  </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                    <label for="Number" class="form-label">Your Phone Number</label>
-                    <input type="text" name="Number" class="Number" placeholder="Type Your Number" autocomplete="on" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-6">
-                  <fieldset>
-                      <label for="chooseGuests" class="form-label">Number Of Prints</label>
-                      <select name="Guests" class="form-select" aria-label="Default select example" id="chooseGuests" onChange="this.form.click()">
-                          <option selected>Choose</option>
-                          <option type="checkbox" name="option1" value="1+">1+</option>
-                          <option value="10+">10+</option>
-                          <option value="50+">50+</option>
-                          <option value="100+">100+</option>
-                      </select>
-                  </fieldset>
-              </div>
-              <div class="col-lg-6">
-                <fieldset>
-                    <label for="Number" class="form-label">Delivery Date</label>
-                    <input type="date" name="date" class="date" required>
-                </fieldset>
-              </div>
-              <div class="col-lg-12">
-                <fieldset>
-                    <label for="address" class="form-label">Your Addesss</label>
-                    <input type="text" name="address" class="Name" placeholder="Type Your Address" autocomplete="on" required>
-                </fieldset>
+        <div class="row">
+            <div class="col-lg-12">
+                <div id="map">
+                  <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3642.7410243798927!2d87.72769687440257!3d24.07542277622269!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39f9f706edb080f7%3A0xc043f9ee4850b993!2sMollarpur%20Baina%20More%20Bus%20Stop!5e0!3m2!1sen!2sin!4v1732521322127!5m2!1sen!2sin" width="100%" height="450px" frameborder="0" style="border:0; border-top-left-radius: 23px; border-top-right-radius: 23px;" allowfullscreen=""></iframe>
+                </div>
             </div>
-              <div class="col-lg-12">
-                  <fieldset>
-                      <label for="chooseProduct" class="form-label">Choose Your Print Product</label>
-                      <select name="Product" class="form-select" aria-label="Default select example" id="chooseCategory" onChange="this.form.click()">
-                          <option selected>Many</option>
-                          <option value="Zipper">Zipper</option>
-                          <option value="Pouche">Pouche</option>
-                          <option value="Packets">Packets</option>
-                          <option value="Business Cards">Business Cards</option>
-                          <option value="Flyers">Flyers</option>
-                          <option value="Posters">Posters</option>
-                          <option value="Brochures">Brochures</option>
-                      </select>
-                  </fieldset>
-              </div>
-              <div class="col-lg-12">
-                  <fieldset>
-                      <label for="chooseProduct" class="form-label">Choose Your Delivery Location</label>
-                      <select name="Product" class="form-select" aria-label="Default select example" id="chooseCategory" onChange="this.form.click()">
-                          <option selected>Mallarpur</option>
-                          <option value="Business Cards">Rampurhat</option>
-                          <option value="Flyers">Suri</option>
-                          <option value="Posters">Kolkata</option>
-                          <option value="Brochures">Other</option>
-                      </select>
-                  </fieldset>
-              </div>
-              <div class="col-lg-12">                        
-                  <fieldset>
-                      <button class="main-button">Send Request</button>
-                  </fieldset>
-              </div>
+            <div class="col-lg-12">
+                <form id="reservation-form" method="POST" role="search" action="{% url 'MAIN:contact' %}">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h4>Contact <em>US</em> Through This <em>Form</em></h4>
+                        </div>
+                        <div class="col-lg-6">
+                            <fieldset>
+                                <label for="name" class="form-label">Your Name</label>
+                                <input type="text" name="name" class="Name" placeholder="Type Your Name" autocomplete="on" required>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-6">
+                            <fieldset>
+                                <label for="phone_number" class="form-label">Your Phone Number</label>
+                                <input type="text" name="phone_number" class="Number" placeholder="Type Your Number" autocomplete="on" required>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-6">
+                            <fieldset>
+                                <label for="number_of_prints" class="form-label">Number Of Prints</label>
+                                <select name="number_of_prints" class="form-select" aria-label="Default select example">
+                                    <option selected>Choose</option>
+                                    <option value="1+">1+</option>
+                                    <option value="10+">10+</option>
+                                    <option value="50+">50+</option>
+                                    <option value="100+">100+</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-6">
+                            <fieldset>
+                                <label for="delivery_date" class="form-label">Delivery Date</label>
+                                <input type="date" name="delivery_date" class="date" required>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <label for="address" class="form-label">Your Address</label>
+                                <input type="text" name="address" class="Name" placeholder="Type Your Address" autocomplete="on" required>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <label for="product" class="form-label">Choose Your Print Product</label>
+                                <select name="product" class="form-select" aria-label="Default select example">
+                                    <option selected>Choose</option>
+                                    <option value="Zipper">Zipper</option>
+                                    <option value="Pouche">Pouche</option>
+                                    <option value="Packets">Packets</option>
+                                    <option value="Business Cards">Business Cards</option>
+                                    <option value="Flyers">Flyers</option>
+                                    <option value="Posters">Posters</option>
+                                    <option value="Brochures">Brochures</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <label for="delivery_location" class="form-label">Choose Your Delivery Location</label>
+                                <select name="delivery_location" class="form-select" aria-label="Default select example">
+                                    <option selected>Choose</option>
+                                    <option value="Mallarpur">Mallarpur</option>
+                                    <option value="Rampurhat">Rampurhat</option>
+                                    <option value="Suri">Suri</option>
+                                    <option value="Kolkata">Kolkata</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-12">
+                            <fieldset>
+                                <button class="main-button">Send Request</button>
+                            </fieldset>
+                        </div>
+                    </div>
+                </form>
             </div>
-          </form>
         </div>
-      </div>
     </div>
-  </div>
+</div>
 
-  {%endblock%}
+{% endblock %}
