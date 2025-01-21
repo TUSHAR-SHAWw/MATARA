@@ -70,30 +70,50 @@
   </div>
 
   <div class="search-results amazing-deals">
-    <div class="container">
-      <div class="row">
-        {% for product in page_obj %}
-        {% if product.image %}
-          <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid">
-        {% else %}
-          <img src="{% static 'default_image.jpg' %}" alt="Default Image" class="img-fluid">
-        {% endif %}
-          <div class="col-lg-4">
-            <div class="product-item">
-              <h4>{{ product.name }}</h4>
-              <div class="product-description">
-                <p>{{ product.description }}</p>
-              </div>
-              <p>Price: ₹{{ product.price }}</p>
-              <p>Category: {{ product.category.name }}</p>
-              <p>In Stock: {% if product.is_in_stock %} Yes {% else %} No {% endif %}</p>
-              
-            </div>
-          </div>
-        {% empty %}
-          <p>No products found matching your search criteria.</p>
-        {% endfor %}
-      </div>
+    <div class="container rr">
+        <div class="row">
+            {% for product in page_obj %}
+                {% if product.image %}
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-3">  <!-- Changed col-md-4 to col-md-6 for medium screens -->
+                        <div class="product-item p-3 border d-flex flex-column h-100" style="border-radius: 5px;">
+                            <a href='{% url 'MAIN:product_detail' product.id %}'>
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid mb-3">
+                            </a>
+                            <h4>{{ product.name }}</h4>
+                            <div class="product-description">
+                                <p>{{ product.description }}</p>
+                            </div>
+                            <div class="main-button rr">
+                                <p>Price: ₹{{ product.price }}</p>
+                                <a href= '{% url 'MAIN:product_detail' product.id %}'>Order</a> 
+                            </div>
+                            <p>Category: {{ product.category.name }}</p>
+                            <p>In Stock: {% if product.is_in_stock %} Yes {% else %} No {% endif %}</p>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="col-lg-4 col-md-6 col-sm-12 mb-3">
+                        <div class="product-item p-3 border d-flex flex-column h-100" style="border-radius: 5px;">
+                            <img src="{% static 'default_image.jpg' %}" alt="Default Image" class="img-fluid mb-3">
+                            <h4>{{ product.name }}</h4>
+                            <div class="product-description">
+                                <p>{{ product.description }}</p>
+                            </div>
+                            <p>Price: ₹{{ product.price }}</p>
+                            <p>Category: {{ product.category.name }}</p>
+                            <p>In Stock: {% if product.is_in_stock %} Yes {% else %} No {% endif %}</p>
+                        </div>
+                    </div>
+                {% endif %}
+            {% empty %}
+                <p>No products found matching your search criteria.</p>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
 
       <!-- Pagination -->
       <div class="col-lg-12">

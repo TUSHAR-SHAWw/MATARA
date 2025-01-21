@@ -44,7 +44,15 @@
   
 
 <body>
-
+    {% if user.is_authenticated %}
+    <div class="main-button cartbtn">
+        <a href="{% url 'MAIN:cart' %}">
+            <i class="fas fa-shopping-cart"></i> Cart
+        </a>
+    </div>
+    {% else %}
+    {% endif %}
+    
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">

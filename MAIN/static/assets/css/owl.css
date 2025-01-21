@@ -233,3 +233,15 @@
   border-radius: 5px;
   margin-top: 10px;
 }
+
+.rr{
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+}
+.cartbtn {
+  position: fixed; /* Fixes the button in place */
+  bottom: 20px;    /* Position from the bottom of the screen */
+  right: 20px;     /* Position from the right of the screen */
+  z-index: 1000;   /* Ensures it stays above other content */
+}
