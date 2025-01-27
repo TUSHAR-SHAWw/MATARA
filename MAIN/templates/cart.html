@@ -1,7 +1,8 @@
+<!-- cart.html -->
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="container mt-5">
+<div class="container " style="margin-top:120px">
   <h2>Your Cart</h2>
 
   {% if cart.items.count %}
@@ -29,7 +30,7 @@
           </td>
           <td>
             <!-- Quantity Update Form -->
-            <form method="POST" action="{% url 'cart:update_quantity' cart_item_id=item.id %}">
+            <form method="POST" action="{% url 'MAIN:cart:update_quantity' cart_item_id=item.id %}">
               {% csrf_token %}
               <div class="input-group">
                 <input type="number" name="quantity" class="form-control" value="{{ item.quantity }}" min="1" max="{{ item.product.stock }}" required>
@@ -42,8 +43,8 @@
           <td>₹{{ item.product.price }}</td>
           <td>₹{{ item.get_total_price }}</td>
           <td>
-            <a href="{% url 'cart:remove_from_cart' cart_item_id=item.id %}" class="btn btn-danger btn-sm">Remove</a>
-          </td>
+            <a href="{% url 'MAIN:cart:remove_from_cart' cart_item_id=item.id %}" class="btn btn-danger btn-sm">Remove</a>
+</td>
         </tr>
         {% endfor %}
       </tbody>
@@ -51,7 +52,7 @@
 
     <!-- Cart Total Section -->
     <div class="cart-total mt-4 d-flex justify-content-between align-items-center">
-      <h4>Total: ₹{{ cart.get_total_price }}</h4>
+      <h4>Total: ₹{{ total_price }}</h4>
       <a href="{% url 'order:checkout' %}" class="btn btn-success btn-lg">Proceed to Checkout</a>
     </div>
 

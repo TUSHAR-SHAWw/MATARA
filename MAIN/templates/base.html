@@ -44,6 +44,7 @@
   
 
 <body>
+    {% if request.path != '/cart/' %}
     {% if user.is_authenticated %}
     <div class="main-button cartbtn">
         <a href="{% url 'MAIN:cart' %}">
@@ -52,7 +53,7 @@
     </div>
     {% else %}
     {% endif %}
-    
+    {% endif %}
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">

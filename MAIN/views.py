@@ -229,46 +229,45 @@ def contact(request):
 
 @login_required
 def add_to_cart(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
+    product = Product.objects.get(id=product_id)
     cart, created = Cart.objects.get_or_create(customer=request.user)
-
-    # Check if the product is already in the cart
     cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
 
-    # Update the quantity if already in cart, else set to 1
-    if not created:
+    if not created:  # If the item already exists, update the quantity
         cart_item.quantity += 1
         cart_item.save()
-    else:
-        cart_item.quantity = 1
-        cart_item.save()
+    
+    return redirect('cart')
 
-    return redirect('cart:view')
+
 
 @login_required
 def cart_view(request):
-    # Ensure the cart exists for the user
+    # Get the user's cart (or create it if it doesn't exist)
     cart, created = Cart.objects.get_or_create(customer=request.user)
-
-    context = {
-        'cart': cart
-    }
-    return render(request, 'cart/cart_page.html', context)
+    
+    # Calculate total price
+    total_price = cart.get_total_price()
+    
+    # Pass the cart and total price to the template
+    return render(request, 'cart.html', {'cart': cart, 'total_price': total_price})
 
 @login_required
 def update_quantity(request, cart_item_id):
     cart_item = CartItem.objects.get(id=cart_item_id)
-    
-    if request.method == "POST":
+    if request.method == 'POST':
         quantity = int(request.POST.get('quantity'))
-        cart_item.quantity = quantity
-        cart_item.save()
-
-    return redirect('cart:view')
+        # Check if quantity is valid (not more than stock)
+        if 1 <= quantity <= cart_item.product.stock:
+            cart_item.quantity = quantity
+            cart_item.save()
+        else:
+            # Handle invalid quantity, maybe add a message for the user
+            pass
+    return redirect('cart')
 
 @login_required
 def remove_from_cart(request, cart_item_id):
     cart_item = CartItem.objects.get(id=cart_item_id)
     cart_item.delete()
-
-    return redirect('cart:view')
+    return redirect('cart')
