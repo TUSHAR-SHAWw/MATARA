@@ -245,3 +245,55 @@
   right: 20px;     /* Position from the right of the screen */
   z-index: 1000;   /* Ensures it stays above other content */
 }
+@media (max-width: 767px) {
+  .table-responsive {
+    overflow-x: auto;
+  }
+
+  .table th, .table td {
+    padding: 8px;  /* Smaller padding for mobile devices */
+  }
+
+  /* Manually set column widths */
+  .table th:nth-child(1), .table td:nth-child(1) {
+    width: 30%; /* Set a custom width for the 'Product' column */
+  }
+
+  .table th:nth-child(2), .table td:nth-child(2) {
+    width: 10%; /* Set a custom width for the 'Quantity' column */
+  }
+
+  .table th:nth-child(3), .table td:nth-child(3) {
+    width: 20%; /* Set a custom width for the 'Price' column */
+  }
+
+  .table th:nth-child(4), .table td:nth-child(4) {
+    width: 20%; /* Set a custom width for the 'Total' column */
+  }
+
+  .table th:nth-child(5), .table td:nth-child(5) {
+    width: 20%; /* Set a custom width for the 'Actions' column */
+  }
+
+  .cart-total {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cart-total h4 {
+    margin-bottom: 10px;
+  }
+
+  .input-group {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .input-group .form-control {
+    margin-bottom: 5px; /* Spacing between quantity input and buttons */
+  }
+
+  .btn-sm {
+    padding: 5px 10px; /* Make buttons more touch-friendly */
+  }
+}
