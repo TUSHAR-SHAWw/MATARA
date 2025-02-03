@@ -95,7 +95,7 @@
                           </li>
                       {% else %}
                           <li>
-                              <a href="{% url 'login' %}" class="{% if request.path == '/login/' %}active{% endif %}">Login</a>
+                              <a href="{% url 'MAIN:login' %}" class="{% if request.path == '/login/' %}active{% endif %}">Login</a>
                           </li>
                       {% endif %}
                   </ul>

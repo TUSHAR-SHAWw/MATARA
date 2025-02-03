@@ -1,6 +1,9 @@
 from django.contrib import admin
 # admin.py
 
+admin.site.site_header = "MA TARA ADMIN"
+admin.site.site_title = "MA TARA ADMIN"
+admin.site.index_title = "Dashboard"
 from .models import *
 
 class ProductAdmin(admin.ModelAdmin):

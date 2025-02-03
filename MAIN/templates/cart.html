@@ -36,9 +36,20 @@
               <form method="POST" action="{% url 'MAIN:update_quantity' cart_item_id=item.id %}">
                 {% csrf_token %}
                 <div class="input-group justify-content-center">
-                  <button type="submit" name="quantity" value="{{ item.quantity|add:"-1" }}" class="btn btn-secondary btn-sm" {% if item.quantity <= 1 %}disabled{% endif %}>-</button>
+                  <!-- Bulk Buttons -->
+                  <button type="submit" name="quantity" value="{{ item.quantity|add:-1 }}" class="btn btn-secondary btn-sm" {% if item.quantity <= 1 %}disabled{% endif %}>-</button>
+
+{% comment %}                  
+                  {% with quantity_10=item.quantity|add:10 quantity_100=item.quantity|add:100 quantity_1000=item.quantity|add:1000 %}
+                    <button type="submit" name="quantity" value="{{ quantity_10 }}" class="btn btn-secondary btn-sm" {% if quantity_10 > item.product.stock %}disabled{% endif %}>10+</button>
+                    <button type="submit" name="quantity" value="{{ quantity_100 }}" class="btn btn-secondary btn-sm" {% if quantity_100 > item.product.stock %}disabled{% endif %}>100+</button>
+                    <button type="submit" name="quantity" value="{{ quantity_1000 }}" class="btn btn-secondary btn-sm" {% if quantity_1000 > item.product.stock %}disabled{% endif %}>1000+</button>
+                  {% endwith %} {% endcomment %}
+
+                  <!-- Quantity Input -->
                   <input type="text" class="form-control" value="{{ item.quantity }}" readonly>
-                  <button type="submit" name="quantity" value="{{ item.quantity|add:"1" }}" class="btn btn-secondary btn-sm" {% if item.quantity >= item.product.stock %}disabled{% endif %}>+</button>
+
+                  <button type="submit" name="quantity" value="{{ item.quantity|add:1 }}" class="btn btn-secondary btn-sm" {% if item.quantity >= item.product.stock %}disabled{% endif %}>+</button>
                 </div>
               </form>
             </td>
