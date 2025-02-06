@@ -70,8 +70,8 @@
                     <h2 class="product-name">{{ product.name }}</h2>
                     <p class="product-category"><strong>Category:</strong><br> {{ product.category }}</p>
                     <p class="product-description"><strong>Description:</strong><br> {{ product.description }}</p>
-                    <p class="product-price"><strong>Price :</strong><br> ₹{{ product.price }} PC</p>
-
+                    <p class="product-price"><strong>Price :</strong> Reasonable  {% comment %} {{ product.price }} PC {% endcomment %}</p>
+                   
                     <!-- Add to Cart Button -->
                     <form method="POST" action="{% url 'MAIN:add_to_cart' product.id %}">
                         {% csrf_token %}

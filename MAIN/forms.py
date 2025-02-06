@@ -25,7 +25,7 @@ class ProductSearchForm(forms.Form):
 class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
-        fields = ['name', 'phone_number', 'number_of_prints', 'delivery_date', 'address', 'product', 'delivery_location']
+        fields = ['name', 'phone_number', 'address', 'product', 'delivery_location']
 
 class CustomLoginForm(AuthenticationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'placeholder': 'Enter Your Username'}))

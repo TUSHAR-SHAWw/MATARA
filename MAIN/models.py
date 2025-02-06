@@ -7,8 +7,8 @@ from django.db import models
 class Contact(models.Model):
     name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=15)
-    number_of_prints = models.CharField(max_length=10)
-    delivery_date = models.DateField()
+    number_of_prints = models.CharField(max_length=10, null=True, blank=True )
+    delivery_date = models.DateField( null=True ,blank=True)
     address = models.TextField()
     product = models.CharField(max_length=255)
     delivery_location = models.CharField(max_length=255)

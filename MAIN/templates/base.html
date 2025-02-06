@@ -44,7 +44,7 @@
   
 
 <body>
-    {% if request.path != '/cart/' %}
+    {% comment %} {% if request.path != '/cart/' %}
     {% if user.is_authenticated %}
     <div class="main-button cartbtn">
         <a href="{% url 'MAIN:cart' %}">
@@ -53,7 +53,7 @@
     </div>
     {% else %}
     {% endif %}
-    {% endif %}
+    {% endif %} {% endcomment %}
   <!-- ***** Preloader Start ***** -->
   <div id="js-preloader" class="js-preloader">
     <div class="preloader-inner">
@@ -81,14 +81,14 @@
                           <a href="{% url 'MAIN:about' %}" class="{% if request.path == '/about/' %}active{% endif %}">About</a>
                       </li>
                       <li>
-                          <a href="{% url 'MAIN:pricing' %}" class="{% if request.path == '/pricing/' %}active{% endif %}">Pricing</a>
-                      </li>
-                      <li>
-                          <a href="{% url 'MAIN:order' %}" class="{% if request.path == '/order/' %}active{% endif %}">Book Order</a>
+                          <a href="{% url 'MAIN:pricing' %}" class="{% if request.path == '/pricing/' %}active{% endif %}">Search</a>
                       </li>
                       <li>
                           <a href="{% url 'MAIN:contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">Contact Us</a>
-                      </li>
+                        </li>
+                        {% comment %} <li>
+                            <a href="{% url 'MAIN:order' %}" class="{% if request.path == '/order/' %}active{% endif %}">Book Order</a>
+                        </li>
                       {% if user.is_authenticated %}
                           <li>
                               <a href="{% url 'MAIN:logout' %}" class="{% if request.path == '/logout/' %}active{% endif %}">Logout</a>
@@ -97,7 +97,7 @@
                           <li>
                               <a href="{% url 'MAIN:login' %}" class="{% if request.path == '/login/' %}active{% endif %}">Login</a>
                           </li>
-                      {% endif %}
+                      {% endif %} {% endcomment %}
                   </ul>
                   
                     <a class='menu-trigger'>

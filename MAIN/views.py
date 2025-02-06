@@ -196,22 +196,22 @@ def contact(request):
         # Get data from the form
         name = request.POST.get('name')
         phone_number = request.POST.get('phone_number')
-        number_of_prints = request.POST.get('number_of_prints')
-        delivery_date = request.POST.get('delivery_date')
+        # number_of_prints = request.POST.get('number_of_prints')
+        # delivery_date = request.POST.get('delivery_date')
         address = request.POST.get('address')
         product = request.POST.get('product')
         delivery_location = request.POST.get('delivery_location')
 
         # Simple form validation (you can add more validation as needed)
-        if not name or not phone_number or not number_of_prints or not delivery_date or not address or not product or not delivery_location:
+        if not name or not phone_number  or not address or not product or not delivery_location:
             return HttpResponse("All fields are required.", status=400)
 
         # Save the data in the Contact model
         contact = Contact(
             name=name,
             phone_number=phone_number,
-            number_of_prints=number_of_prints,
-            delivery_date=delivery_date,
+            # number_of_prints=number_of_prints,
+            # delivery_date=delivery_date,
             address=address,
             product=product,
             delivery_location=delivery_location

@@ -47,13 +47,14 @@
               </div>
               <div class="col-lg-4">
                 <fieldset>
-                  <select name="price" class="form-select" aria-label="Select Price Range">
-                    <option value="">Price Range</option>
-                    <option value="100" {% if form.price.value == "100" %} selected {% endif %}>₹100 - ₹250</option>
+                  <select name="price" class="form-select" aria-label="Select Quality">
+                    <option value="">Select Quality</option>
+                    <option value="">All</option>
+                    {% comment %} <option value="100" {% if form.price.value == "100" %} selected {% endif %}>₹100 - ₹250</option>
                     <option value="250" {% if form.price.value == "250" %} selected {% endif %}>₹250 - ₹500</option>
                     <option value="500" {% if form.price.value == "500" %} selected {% endif %}>₹500 - ₹1,000</option>
                     <option value="1000" {% if form.price.value == "1000" %} selected {% endif %}>₹1,000 - ₹2,500</option>
-                    <option value="2500+" {% if form.price.value == "2500+" %} selected {% endif %}>₹2,500+</option>
+                    <option value="2500+" {% if form.price.value == "2500+" %} selected {% endif %}>₹2,500+</option> {% endcomment %}
                   </select>
                 </fieldset>
               </div>
@@ -84,7 +85,7 @@
                                 <p>{{ product.description }}</p>
                             </div>
                             <div class="main-button rr">
-                                <p>Price: ₹{{ product.price }}</p>
+                                 <p><!--Price: ₹{{ product.price }} --></p>
                                 <a href= '{% url 'MAIN:product_detail' product.id %}'>Order</a> 
                             </div>
                             <p>Category: {{ product.category.name }}</p>
@@ -137,7 +138,7 @@
 
 
 
-  <div class="amazing-deals">
+  {% comment %} <div class="amazing-deals">
     <div class="container">
       <div class="row">
         <div class="col-lg-6 offset-lg-3">
@@ -286,6 +287,6 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> {% endcomment %}
   
 {%endblock%}
