@@ -38,12 +38,12 @@
                     <div class="col-lg-12">
                         <div class="owl-cites-town owl-carousel">
                             {% for product in products %}
-                            <div class="item">
+                            {% comment %} <div class="item">
                                 <div class="thumb">
                                     <img src="{{ product.image.url }}" alt="{{ product.name }}">
                                     <h4>{{ product.name }}</h4>
                                 </div>
-                            </div>
+                            </div> {% endcomment %}
                             {% endfor %}
                         </div>
                     </div>
