@@ -161,9 +161,9 @@ body {
 
 .border-button a {
   font-size: 14px;
-  color: var(--ui-color);
+  color: white;
   background-color: transparent;
-  border: 1px solid var(--ui-color);
+  border: 3px solid var(--ui-color);
   padding: 12px 30px;
   display: inline-block;
   border-radius: 25px;
@@ -173,6 +173,8 @@ body {
   transition: all .3s;
   position: relative;
   overflow: hidden;
+  text-shadow: 1px 1px 3px rgb(0, 0, 0), -1px -1px 3px rgb(0, 0, 0);
+  
 }
 
 .border-button a:hover {

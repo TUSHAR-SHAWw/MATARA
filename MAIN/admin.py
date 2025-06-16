@@ -57,5 +57,5 @@ admin.site.register(Cart, CartAdmin)
 admin.site.register(Payment, PaymentAdmin)
 admin.site.register(Contact)
 admin.site.register(Category)
-
+admin.site.register(Gallery)
 # Register your models here.

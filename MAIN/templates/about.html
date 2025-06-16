@@ -241,6 +241,107 @@
         </div>
     </div>
 </div>
+<!-- ***** Photo Gallery Area Start ***** -->
+<style> 
+    .photo-gallery {
+        padding: 50px 20px;
+        background-color: #f9f9f9;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+    }
+    
+    .photo-gallery .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        aspect-ratio: 4/3;
+    }
+    
+    .photo-gallery .gallery-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .photo-gallery .gallery-item:hover img {
+        transform: scale(1.2) rotate(2deg);
+    }
+    
+    .photo-gallery .overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        opacity: 0;
+        transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+    }
+    
+    .photo-gallery .gallery-item:hover .overlay {
+        opacity: 1;
+    }
+    
+    .photo-gallery .overlay h4 {
+        font-size: 24px;
+        margin-bottom: 10px;
+        font-weight: bold;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    
+    .photo-gallery .gallery-item:hover .overlay h4 {
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: 0.1s;
+    }
+    
+    .photo-gallery .overlay p {
+        font-size: 16px;
+        line-height: 1.5;
+        transform: translateY(20px);
+        opacity: 0;
+        transition: all 0.3s ease;
+    }
+    
+    .photo-gallery .gallery-item:hover .overlay p {
+        transform: translateY(0);
+        opacity: 1;
+        transition-delay: 0.2s;
+    }
+</style>
+<div class="photo-gallery">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2>Explore Our Workplace</h2>
+                <p>Check out our printing Machines and the Factory below.</p>
+            </div>
+        </div>
+        <div class="row">
+            {% for item in gallery_items %}
+            <div class="col-md-4">
+                <div class="gallery-item">
+                    <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                    <div class="overlay">
+                        <h4>{{ item.title }}</h4>
+                        <p>{{ item.description }}</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- ***** Photo Gallery Area End ***** -->
 
 
 {% endblock %}

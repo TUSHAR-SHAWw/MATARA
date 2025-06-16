@@ -1,3 +1,56 @@
 .thum h4{
     border: 1px solid black;
 }
+.photo-gallery {
+    padding: 50px 0;
+    background-color: #f9f9f9;
+}
+
+.photo-gallery .gallery-item {
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.photo-gallery .gallery-item img {
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.photo-gallery .gallery-item:hover img {
+    transform: scale(1.1); /* Zoom effect on hover */
+}
+
+.photo-gallery .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.photo-gallery .gallery-item:hover .overlay {
+    opacity: 1; /* Show overlay on hover */
+}
+
+.photo-gallery .overlay h4 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.photo-gallery .overlay p {
+    font-size: 16px;
+    line-height: 1.5;
+}

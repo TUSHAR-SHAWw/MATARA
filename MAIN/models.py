@@ -171,3 +171,12 @@ class Payment(models.Model):
 
     def __str__(self):
         return f"Payment for Order #{self.order.id} - {self.status}"
+
+
+class Gallery(models.Model):
+    image = models.ImageField(upload_to='gallery_images/')
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title

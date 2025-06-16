@@ -183,7 +183,8 @@ def index(request):
 
 def about(request):
     products = Category.objects.all()
-    return render(request, 'about.html',{'products': products})
+    gallery_items = Gallery.objects.all()
+    return render(request, 'about.html',{'products': products,'gallery_items': gallery_items})
 def order(request):
     return render(request, 'booking.html')
 
